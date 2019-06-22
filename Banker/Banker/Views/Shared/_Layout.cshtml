@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container">
             <div class="navbar-header">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,10 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">@Html.ActionLink("HOME", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item active">@Html.ActionLink("Profit", "Index", "Profit", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                     <li class="nav-item active">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li class="nav-item active">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
@@ -30,9 +33,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            
-        </footer>
+        <footer></footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

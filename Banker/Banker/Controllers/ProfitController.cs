@@ -18,5 +18,17 @@ namespace Banker.Controllers
             model.Profit = RepositoryUnits.Instance().ProfitRepository.Select(User.Identity.GetUserId());
             return View(model);
         }
+
+        public ActionResult Profit()
+        {
+            List<ProfitModel> model = RepositoryUnits.Instance().ProfitRepository.Select(User.Identity.GetUserId());
+            return View(model);
+        }
+
+        public ActionResult Cards()
+        {
+            List<CardsModel> model = RepositoryUnits.Instance().CardsRepository.Select(User.Identity.GetUserId());
+            return View(model);
+        }
     }
 }

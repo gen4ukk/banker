@@ -1,4 +1,4 @@
-﻿@model Banker.Models.Profit.ProfitsModel
+﻿@model List<Banker.Models.Profit.CardsModel>
 
 @{
     ViewBag.Title = "Index";
@@ -15,20 +15,20 @@
     <div class="col-3">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <a class="nav-link active" id="tab-cards" data-toggle="pill" href="#v-pills-cards" role="tab" aria-controls="v-pills-cards" aria-selected="true">Cards</a>
-            <a class="nav-link" id="tab-profit" data-toggle="pill" href="#v-pills-profit" role="tab" aria-controls="v-pills-profit" aria-selected="false">Profit</a>
+            @Html.ActionLink("Profit", "Profit", "Profit", routeValues: null, htmlAttributes: new { id = "tab-profit", @class = "nav-link", role = "tab" })
         </div>
     </div>
     <div class="col-9">
 
         <button type="button" class="btn btn-primary mr-1 mb-3 float-right">Delete</button>
         <button type="button" class="btn btn-primary mr-1 mb-3 float-right">Modify</button>
-        <button type="button" id="zalupa" class="btn btn-primary mr-1 mb-3 float-right">Add</button>
+        <button type="button" class="btn btn-primary mr-1 mb-3 float-right">Add</button>
 
 
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-cards" role="tabpanel" aria-labelledby="tab-cards">
                 @{
-                    WebGrid grid = new WebGrid(Model.Cards, rowsPerPage: 5, canPage: true);
+                    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, canPage: true);
                 }
                 @grid.Table(
                 headerStyle : "thead-dark",
@@ -43,26 +43,6 @@
                 )
 
                 @grid.PagerList(paginationStyle: "pagination justify-content-end")
-            </div>
-            <div class="tab-pane fade" id="v-pills-profit" role="tabpanel" aria-labelledby="tab-profit">
-                <div>
-                    @{
-                        WebGrid grid2 = new WebGrid(Model.Profit, rowsPerPage: 5, canPage: true);
-                    }
-                    @grid2.Table(
-                    headerStyle : "thead-dark",
-                    columns :
-                    grid2.Columns(
-                                grid2.Column("Id"),
-                                grid2.Column("CardId", header: "Card"),
-                                grid2.Column("Amount"),
-                                grid2.Column("Profit"),
-                                grid2.Column("Description")),
-                    tableStyle: "table table-bordered table-hover"
-                    )
-
-                    @grid2.PagerList(paginationStyle: "pagination justify-content-end")
-                </div>
             </div>
         </div>
     </div>

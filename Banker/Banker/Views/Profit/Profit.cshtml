@@ -1,0 +1,51 @@
+﻿@model List<Banker.Models.Profit.ProfitModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts {
+
+}
+<br />
+<h2>Index</h2>
+<br />
+
+<div class="row">
+    <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            @Html.ActionLink("Cards", "Cards", "Profit", routeValues: null, htmlAttributes: new { id = "tab-cards", @class = "nav-link", role = "tab" })
+            <a class="nav-link active" id="tab-profit" data-toggle="pill" href="#v-pills-profit" role="tab" aria-controls="v-pills-profit" aria-selected="false">Profit</a>
+        </div>
+    </div>
+    <div class="col-9">
+
+        <button type="button" class="btn btn-primary mr-1 mb-3 float-right">Delete</button>
+        <button type="button" class="btn btn-primary mr-1 mb-3 float-right">Modify</button>
+        <button type="button" class="btn btn-primary mr-1 mb-3 float-right">Add</button>
+
+
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-profit" role="tabpanel" aria-labelledby="tab-profit">
+                <div>
+                    @{
+                        WebGrid grid2 = new WebGrid(Model, rowsPerPage: 5, canPage: true);
+                    }
+                    @grid2.Table(
+                    headerStyle : "thead-dark",
+                    columns :
+                    grid2.Columns(
+                                grid2.Column("Id"),
+                                grid2.Column("CardId", header: "Card"),
+                                grid2.Column("Amount"),
+                                grid2.Column("Profit"),
+                                grid2.Column("Description")),
+                    tableStyle: "table table-bordered table-hover"
+                    )
+
+                    @grid2.PagerList(paginationStyle: "pagination justify-content-end")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

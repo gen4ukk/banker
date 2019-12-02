@@ -10,7 +10,7 @@ namespace SmsSynchronizer.Model
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int id { get; set; }
 
-        public string SMSId { get; set; }
+        public int SMSId { get; set; }
 
         [Ignore]
         public string Address { get; set; }

@@ -9,6 +9,7 @@ namespace SmsSynchronizer.Model
     {
         private double salary;
         private double expense;
+        private List<SMS> smss = new List<SMS>();
 
 
         public double Salary
@@ -25,8 +26,8 @@ namespace SmsSynchronizer.Model
 
         public List<SMS> SMSs
         {
-            get;
-            set;
+            get { return smss; }
+            set { smss = value; OnPropertyChanged("SMSs"); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

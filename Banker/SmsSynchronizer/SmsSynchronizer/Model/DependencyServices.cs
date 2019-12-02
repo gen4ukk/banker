@@ -9,7 +9,7 @@ namespace SmsSynchronizer.Services
 {
     public interface BtnClickService
     {
-        void SynchClick();
+        List<SMS> GetNotSynchSMS(int code);
 
         MainPageModel CalculateSalary(DateTime dtBegin, DateTime dtEnd);
     }

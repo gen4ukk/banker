@@ -26,6 +26,14 @@ namespace SmsSynchronizer.Droid
             return GetSMS(selection, selectionArgs); ;
         }
 
+        public static List<SMS> GetSMSaboveCode(string address, int code)
+        {
+            var selection = "address = ? and _id > ?";
+            var selectionArgs = new string[] { address, code.ToString() };
+
+            return GetSMS(selection, selectionArgs); ;
+        }
+
         public static List<SMS> GetSMSbyAddress(string address, DateTime dateBegin, DateTime dateEnd)
         {
             var selection = "address = ? and date > ? and date < ? ";
@@ -51,7 +59,7 @@ namespace SmsSynchronizer.Droid
                     do
                     {
                         var sms = new SMS();
-                        sms.SMSId = cursor.GetString(cursor.GetColumnIndex("_id"));
+                        sms.SMSId = cursor.GetInt(cursor.GetColumnIndex("_id"));
                         sms.Address = cursor.GetString(cursor.GetColumnIndex("address"));
                         sms.Body = cursor.GetString(cursor.GetColumnIndex("body"));
                         sms.UnixDate = cursor.GetString(cursor.GetColumnIndex("date"));

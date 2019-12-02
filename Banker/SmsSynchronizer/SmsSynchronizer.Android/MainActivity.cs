@@ -11,6 +11,7 @@ using Android.Content;
 using Android;
 using SmsSynchronizer.Services;
 using SmsSynchronizer.Model;
+using System.Collections.Generic;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SmsSynchronizer.Droid.MainActivity))]
 namespace SmsSynchronizer.Droid
@@ -26,9 +27,12 @@ namespace SmsSynchronizer.Droid
             return new MainPageModel() { SMSs = parsedSMS };
         }
 
-        public void SynchClick()
+        public List<SMS> GetNotSynchSMS(int code)
         {
+            var listOfSMS = SMSAnalyzer.GetSMSaboveCode("OTP Bank", code);
+            var parsedSMS = SMSAnalyzer.ParseSMSBody(listOfSMS, "OTP Bank");
 
+            return parsedSMS;
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

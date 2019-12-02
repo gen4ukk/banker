@@ -64,6 +64,8 @@
                     Grid.Row="3" />
 
             <Button Text="Synchronize"
+                    x:Name="btnSynchronize"
+                    IsEnabled="False"
                     Grid.Row="4"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
@@ -94,6 +96,9 @@
                             </DataTemplate>
                         </syncfusion:GridTemplateColumn.CellTemplate>
                     </syncfusion:GridTemplateColumn>
+
+                    <syncfusion:GridTextColumn HeaderText="SMSId"
+                                   MappingName="SMSId" />
 
                     <syncfusion:GridTextColumn HeaderText="Amount"
                                    MappingName="Amount" />

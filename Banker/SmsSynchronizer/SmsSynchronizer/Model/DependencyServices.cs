@@ -9,7 +9,7 @@ namespace SmsSynchronizer.Services
 {
     public interface BtnClickService
     {
-        List<SMS> GetNotSynchSMS(int code);
+        List<SMSModel> GetNotSynchSMS(SettingsSchemaModel model, int code);
 
         MainPageModel CalculateSalary(DateTime dtBegin, DateTime dtEnd);
     }

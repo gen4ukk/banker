@@ -21,16 +21,17 @@ namespace SmsSynchronizer.Droid
     {
         public MainPageModel CalculateSalary(DateTime dtBegin, DateTime dtEnd)
         {
-            var listOfSMS = SMSAnalyzer.GetSMSbyAddress("OTP Bank", dtBegin, dtEnd);
-            var parsedSMS = SMSAnalyzer.ParseSMSBody(listOfSMS, "OTP Bank");
+            //var listOfSMS = SMSAnalyzer.GetSMSbyAddress("OTP Bank", dtBegin, dtEnd);
+            //var parsedSMS = SMSAnalyzer.ParseSMSBody(listOfSMS, "OTP Bank");
 
-            return new MainPageModel() { SMSs = parsedSMS };
+            //return new MainPageModel() { SMSs = parsedSMS };
+            return new MainPageModel();
         }
 
-        public List<SMS> GetNotSynchSMS(int code)
+        public List<SMSModel> GetNotSynchSMS(SettingsSchemaModel model, int code)
         {
-            var listOfSMS = SMSAnalyzer.GetSMSaboveCode("OTP Bank", code);
-            var parsedSMS = SMSAnalyzer.ParseSMSBody(listOfSMS, "OTP Bank");
+            var listOfSMS = SMSAnalyzer.GetSMSaboveCode(model.BankName, code);
+            var parsedSMS = SMSAnalyzer.ParseSMSBody(listOfSMS, model);
 
             return parsedSMS;
         }

@@ -18,7 +18,7 @@ namespace SmsSynchronizer.Droid
 {
     public class SMSAnalyzer
     {
-        public static List<SMS> GetSMSbyAddress(string address)
+        public static List<SMSModel> GetSMSbyAddress(string address)
         {
             var selection = "address = ?";
             var selectionArgs = new string[] { address };
@@ -26,7 +26,7 @@ namespace SmsSynchronizer.Droid
             return GetSMS(selection, selectionArgs); ;
         }
 
-        public static List<SMS> GetSMSaboveCode(string address, int code)
+        public static List<SMSModel> GetSMSaboveCode(string address, int code)
         {
             var selection = "address = ? and _id > ?";
             var selectionArgs = new string[] { address, code.ToString() };
@@ -34,7 +34,7 @@ namespace SmsSynchronizer.Droid
             return GetSMS(selection, selectionArgs); ;
         }
 
-        public static List<SMS> GetSMSbyAddress(string address, DateTime dateBegin, DateTime dateEnd)
+        public static List<SMSModel> GetSMSbyAddress(string address, DateTime dateBegin, DateTime dateEnd)
         {
             var selection = "address = ? and date > ? and date < ? ";
             long unixTimeBegin = (long)(dateBegin - new DateTime(1970, 1, 1)).TotalMilliseconds;
@@ -44,9 +44,9 @@ namespace SmsSynchronizer.Droid
             return GetSMS(selection, selectionArgs); ;
         }
 
-        private static List<SMS> GetSMS(string selection, string[] selectionArgs)
+        private static List<SMSModel> GetSMS(string selection, string[] selectionArgs)
         {
-            var listOfSMS = new List<SMS>();
+            var listOfSMS = new List<SMSModel>();
             try
             {
                 var context = Application.Context.ApplicationContext;
@@ -58,7 +58,7 @@ namespace SmsSynchronizer.Droid
                 {
                     do
                     {
-                        var sms = new SMS();
+                        var sms = new SMSModel();
                         sms.SMSId = cursor.GetInt(cursor.GetColumnIndex("_id"));
                         sms.Address = cursor.GetString(cursor.GetColumnIndex("address"));
                         sms.Body = cursor.GetString(cursor.GetColumnIndex("body"));
@@ -76,39 +76,52 @@ namespace SmsSynchronizer.Droid
             return listOfSMS;
         }
 
-        public static List<SMS> ParseSMSBody(List<SMS> listOfSMS, string address)
+        public static List<SMSModel> ParseSMSBody(List<SMSModel> listOfSMS, SettingsSchemaModel model)
         {
-            var parsedList = new List<SMS>();
+            var parsedList = new List<SMSModel>();
 
-            if (address == "OTP Bank")
+            try
             {
-                try
+                bool financeSMS;
+
+                string profitWordsPattern = string.Empty;
+
+                if (model.KeyProfitWords != null)
                 {
-                    bool financeSMS;
-
-                    foreach (var item in listOfSMS)
+                    foreach (var wordItem in model.KeyProfitWords)
                     {
-                        financeSMS = false;
-                        if (item.Body.Contains("Popovnennya") || item.Body.Contains("Zarahuvannia"))
-                            financeSMS = true;
-
-                        Match match = Regex.Match(item.Body, @"Suma:\s+(-?\d+(?:\.\d+)?)\sUAH");
-
-                        if (match.Success)
-                        {
-                            item.Profit = financeSMS;
-                            item.Amount = Convert.ToDouble(match.Groups[1].Value, CultureInfo.InvariantCulture.NumberFormat);
-                            item.Date = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddMilliseconds(Convert.ToInt64(item.UnixDate));
-                            item.Checked = true;
-
-                            parsedList.Add(item);
-                        }
+                        profitWordsPattern += wordItem.Name + "|";
                     }
                 }
-                catch (Exception ex)
-                {
 
+                if (!string.IsNullOrEmpty(profitWordsPattern))
+                    profitWordsPattern = profitWordsPattern.Remove(profitWordsPattern.Length - 1);
+
+                foreach (var item in listOfSMS)
+                {
+                    financeSMS = false;
+
+                    Match matchKeyWords = Regex.Match(item.Body, profitWordsPattern);
+
+                    if (matchKeyWords.Success)
+                        financeSMS = true;
+
+                    Match match = Regex.Match(item.Body, model.PatternForAmount);
+
+                    if (match.Success)
+                    {
+                        item.Profit = financeSMS;
+                        item.Amount = Convert.ToDouble(match.Groups[1].Value, CultureInfo.InvariantCulture.NumberFormat);
+                        item.Date = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddMilliseconds(Convert.ToInt64(item.UnixDate));
+                        item.Checked = true;
+
+                        parsedList.Add(item);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+
             }
 
             return parsedList;

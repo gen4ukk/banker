@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmsSynchronizer.View;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,7 +13,8 @@ namespace SmsSynchronizer
             Xamarin.Forms.DataGrid.DataGridComponent.Init();
             InitializeComponent();
 
-            MainPage = new MainPage();
+            //MainPage = new MainPage();
+            MainPage = new Navigation();
         }
 
         protected override void OnStart()

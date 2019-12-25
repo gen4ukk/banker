@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+             xmlns:viewModels="clr-namespace:SmsSynchronizer.ViewModel"
+             x:Class="SmsSynchronizer.View.CurrencyExchange">
+
+    <ContentPage.BindingContext>
+        <viewModels:CurrencyExchangeViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <syncfusion:SfDataGrid x:Name="dataGrid"
+                                   Grid.Row="4"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="4"
+                                   AutoGenerateColumns="False"                               
+                                   ColumnSizer="Star"
+                                   AllowSorting="True"
+                                   AllowGroupExpandCollapse="True"
+                                   VerticalOptions="Fill"
+                                   HorizontalOptions="FillAndExpand"                            
+                                   ItemsSource="{Binding Grid}">
+
+                <syncfusion:SfDataGrid.Columns x:TypeArguments="syncfusion:Columns">
+
+                    <syncfusion:GridTextColumn HeaderText="Name"
+                                               MappingName="Name" />
+
+                    <syncfusion:GridTextColumn HeaderText="Buy"
+                                               MappingName="Buy" />
+
+                    <syncfusion:GridTextColumn HeaderText="Sale"
+                                               MappingName="Sale" />
+
+                </syncfusion:SfDataGrid.Columns>
+
+            </syncfusion:SfDataGrid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

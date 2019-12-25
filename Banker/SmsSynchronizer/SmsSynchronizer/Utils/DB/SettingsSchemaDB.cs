@@ -15,26 +15,28 @@ namespace SmsSynchronizer.Utils.DB
     {
         private SQLiteConnection sqlconnection;
 
-        public SettingsSchemaDB()
+        public SettingsSchemaDB(SQLiteConnection connection)
         {
-            sqlconnection = DependencyService.Get<ISQLite>().GetConnection();
+            sqlconnection = connection;
             sqlconnection.CreateTable<SettingsSchemaModel>();
             SetDefaultScheme();
         }
 
         public void SetDefaultScheme()
         {
+            var keyProfitWordDB = new KeyProfitWordDB(sqlconnection);
+            var SMSDB = new SMSDB(sqlconnection);
+
             var res = GetDefaultScheme();
             if (res != null)
-                return;
-
-            var keyProfitWordDB = new KeyProfitWordDB();
+                return;                       
 
             var model = new SettingsSchemaModel()
             {
                 SchemaName = "Default Schema",
-                ShowAllMessages = false,
-                BankName = "OTP Bank",
+                ShowAllMessages = true,
+                //BankName = "Bank Name",
+                Use = true,
                 PatternForAmount = @"Suma:\s+(-?\d+(?:\.\d+)?)\sUAH",
                 UserSchema = false,
                 KeyProfitWords = new List<KeyProfitWordModel>(){
@@ -47,7 +49,7 @@ namespace SmsSynchronizer.Utils.DB
 
         public SettingsSchemaModel GetDefaultScheme()
         {
-            return (from t in sqlconnection.GetAllWithChildren<SettingsSchemaModel>(recursive: true) where t.SchemaName == "Default Schema" select t).FirstOrDefault();
+            return (from t in sqlconnection.GetAllWithChildren<SettingsSchemaModel>(recursive: true) where t.UserSchema == false select t).FirstOrDefault();
         }
 
         public int DropTable()
@@ -55,7 +57,7 @@ namespace SmsSynchronizer.Utils.DB
             return sqlconnection.DropTable<SettingsSchemaModel>();
         }
 
-        public IEnumerable<SettingsSchemaModel> GetSettingsSchemas()
+        public List<SettingsSchemaModel> GetSettingsSchemas()
         {
             return (from t in sqlconnection.GetAllWithChildren<SettingsSchemaModel>(recursive: true) select t).ToList();
         }
@@ -63,6 +65,11 @@ namespace SmsSynchronizer.Utils.DB
         public SettingsSchemaModel GetSettingsSchema(int id)
         {
             return sqlconnection.GetAllWithChildren<SettingsSchemaModel>(recursive: true).FirstOrDefault(t => t.Id == id);
+        }
+
+        public void UpdateSettingsSchema(SettingsSchemaModel schema)
+        {
+            sqlconnection.Update(schema);
         }
 
         public void DeleteSettingsSchema(int id)
@@ -75,14 +82,13 @@ namespace SmsSynchronizer.Utils.DB
             sqlconnection.InsertWithChildren(schema, recursive: true);
         }
 
-        public SettingsSchemaModel GetUsersSchema()
+        public List<SettingsSchemaModel> GetUsersSchemas()
         {
-            var query = (from schema in sqlconnection.GetAllWithChildren<SettingsSchemaModel>(recursive: true).ToList()
-                         join user in sqlconnection.Table<UserModel>().ToList()
-                         on schema.Id equals user.SettingsSchemaId
-                         select schema).FirstOrDefault();
+            return (from schema in sqlconnection.GetAllWithChildren<SettingsSchemaModel>(recursive: true)
+                    where schema.UserSchema == true
+                    select schema)
+                    .ToList();
 
-            return query;
         }
     }
 }

@@ -14,9 +14,9 @@ namespace SmsSynchronizer.Utils.DB
     {
         private SQLiteConnection sqlconnection;
 
-        public UserDB()
+        public UserDB(SQLiteConnection connection)
         {
-            sqlconnection = DependencyService.Get<ISQLite>().GetConnection();
+            sqlconnection = connection;
             sqlconnection.CreateTable<UserModel>();
             SetDefaultUser();
         }
@@ -32,7 +32,7 @@ namespace SmsSynchronizer.Utils.DB
                 res = new UserModel() { Name = "Evgen" };
             }
 
-            var schema = new SettingsSchemaDB().GetDefaultScheme();
+            var schema = new SettingsSchemaDB(sqlconnection).GetDefaultScheme();
 
             res.SettingsSchemaId = schema.Id;
 

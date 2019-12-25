@@ -2,102 +2,142 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmsSynchronizer.View.SettingsPage"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              Title="Settings">
     <ContentPage.Content>
         <StackLayout>
 
-            <Grid Margin="10,10,10,10" x:Name="grid">
+            <Grid x:Name="grid">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.05*" />
+                    <RowDefinition Height="0.05*" />
+                    <RowDefinition Height="0.05*" />
+                    <RowDefinition Height="0.05*" />
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.4*" />
-                        <ColumnDefinition Width="0.6*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Schema name"
-                       VerticalOptions="Center"
-                       Grid.Column="0" />
-
-                    <Label Text="{Binding SchemaName}" 
-                       VerticalOptions="Center"
-                       HorizontalOptions="EndAndExpand"              
-                       Grid.Column="1" />
+                    <inputLayout:SfTextInputLayout
+                        HorizontalOptions="Center"
+                        Hint="Schema name"
+                        ContainerType="Filled">
+                        <Entry Text="{Binding SchemaName}"/>
+                    </inputLayout:SfTextInputLayout>
                 </Grid>
 
-                <Grid Grid.Row="1" VerticalOptions ="FillAndExpand" HorizontalOptions="FillAndExpand" x:Name="BankNameRow">
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.4*" />
-                        <ColumnDefinition Width="0.6*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Bank name"
-                       VerticalOptions="Center"
-                       Grid.Column="0"/>
+                    <!--<inputLayout:SfTextInputLayout
+                        HorizontalOptions="Center"
+                        Hint="Bank name"
+                        ContainerType="Filled">
+                        <Entry Text="{Binding BankName}"/>
+                    </inputLayout:SfTextInputLayout>-->
 
-                    <Label Text="{Binding BankName}" 
-                       VerticalOptions="Center"
-                       HorizontalOptions="EndAndExpand"                     
-                       Grid.Column="1"/>
+                    <inputLayout:SfTextInputLayout Hint="Bank name" ContainerType="Filled">
+                        <combobox:SfComboBox x:Name="comboBox"
+                                             MaximumDropDownHeight="200"
+                                             IsEditableMode="true" 
+                                             AllowFiltering="True" 
+                                             SelectionChanged="ComboBox_SelectionChanged"
+                                             Text="{Binding BankName}"
+                                             SuggestionMode="Contains"
+                                             NoResultsFoundText="No items found"
+                                             DataSource="{Binding Addresses}"
+                                             DisplayMemberPath="Name">
+                        </combobox:SfComboBox>
+                    </inputLayout:SfTextInputLayout>
                 </Grid>
 
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.4*" />
-                        <ColumnDefinition Width="0.6*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Show all messages"
-                       VerticalOptions="Center"
-                       Grid.Column="0"/>
-
-                    <Switch IsToggled="{Binding ShowAllMessages}"
-                       HorizontalOptions="EndAndExpand"
-                       VerticalOptions="Center"
-                       IsEnabled="{Binding UserSchema}"
-                       Grid.Column="1"/>
+                    <inputLayout:SfTextInputLayout
+                        HorizontalOptions="Center"
+                        Hint="Pattern for amount"
+                        ContainerType="Filled">
+                        <Entry Text="{Binding PatternForAmount}"/>
+                    </inputLayout:SfTextInputLayout>
                 </Grid>
 
                 <Grid Grid.Row="3" VerticalOptions ="FillAndExpand" HorizontalOptions="FillAndExpand" x:Name="KeyProfitWordRow">
 
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ClickProfitWords}" />
+                    </Grid.GestureRecognizers>
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.4*" />
                         <ColumnDefinition Width="0.6*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Key profit words" 
+                    <Label Text="Key profit words" Margin="10,0,0,0"
                            VerticalOptions="Center" 
                            Grid.Column="0"/>
 
                     <Label Text="{Binding KeyProfitWords.Count}"
-                           Grid.Column="1"
+                           Margin="0,0,10,0"
+                           Grid.Column="1" 
                            VerticalOptions="Center"
                            HorizontalOptions="EndAndExpand"/>
                 </Grid>
 
-                <Grid Grid.Row="4" VerticalOptions ="FillAndExpand" HorizontalOptions="FillAndExpand" x:Name="PatternForAmountRow">
+                <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.4*" />
                         <ColumnDefinition Width="0.6*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Pattern for amount"
+                    <Label Text="Show all messages" Margin="10,0,0,0"
                        VerticalOptions="Center"
                        Grid.Column="0"/>
 
-                    <Label Text="{Binding PatternForAmount}" 
+                    <Switch IsToggled="{Binding ShowAllMessages}"
+                       Margin="0,0,10,0"
+                       HorizontalOptions="EndAndExpand"
                        VerticalOptions="Center"
-                       HorizontalOptions="EndAndExpand"                     
                        Grid.Column="1"/>
                 </Grid>
-            </Grid>
 
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*" />
+                        <ColumnDefinition Width="0.6*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Use" Margin="10,0,0,0"
+                       VerticalOptions="Center"
+                       Grid.Column="0"/>
+
+                    <Switch IsToggled="{Binding Use}"
+                            Margin="0,0,10,0"
+                       HorizontalOptions="EndAndExpand"
+                       VerticalOptions="Center"
+                       Grid.Column="1"/>
+                </Grid>
+
+                <Grid Grid.Row="6">
+
+                    <Button Text="Save" 
+                            Margin="10,0,10,0"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            Command="{Binding BtnSave}"
+                            Grid.Column="0"/>
+                </Grid>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

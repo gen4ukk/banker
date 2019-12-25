@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gen4ukk.SmsSynchronizer" android:installLocation="auto" android:versionCode="1" android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gen4ukk.SmsSynchronizer" android:installLocation="auto" android:versionCode="1" android:versionName="1.1">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
 	<uses-permission android:name="android.permission.READ_SMS" />
-	<application android:label="SmsSynchronizer" android:icon="@mipmap/icon"></application>
+	<uses-permission android:name="android.permission.WRITE_SMS" />
+	<uses-permission android:name="android.permission.SEND_SMS" />
+	<uses-permission android:name="android.permission.RECEIVE_SMS" />
+	<uses-permission android:name="android.permission.BROADCAST_SMS" />
+	<application android:icon="@mipmap/icon" android:label="SMSAnalyzer"></application>
 </manifest>

@@ -1,119 +1,119 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:SmsSynchronizer"
-             xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms" 
-             xmlns:ia="clr-namespace:IntelliAbb.Xamarin.Controls;assembly=IntelliAbb.Xamarin.Controls"
-             x:Class="SmsSynchronizer.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+             xmlns:viewModels="clr-namespace:SmsSynchronizer.ViewModel"
+             x:Class="SmsSynchronizer.View.MainPage"
              Title="Calculations">
 
-    <ScrollView>
-        <Grid Margin="10,10,10,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="0.5*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-            </Grid.RowDefinitions>
-            <Label Text="First day"
-                   VerticalOptions="Center"
-                   Grid.Column="0" 
-                   Grid.Row="0" />
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel/>
+    </ContentPage.BindingContext>
 
-            <DatePicker x:Name="dtBegin"
-                        DateSelected="DateSelected" 
-                        Grid.Column="1" Grid.Row="0"
-                        VerticalOptions="Center"
-                        />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.6*" />
+            <ColumnDefinition Width="0.4*" />
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="0.3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.06*" />
+            <RowDefinition Height="0.06*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.7*" />
+        </Grid.RowDefinitions>
 
-            <Label Grid.Row="1"
-                   Grid.Column="0"
-                   VerticalOptions="Center"
-                   Text="Last day" />
-
-            <DatePicker  x:Name="dtEnd"
-                         VerticalOptions="Center"
-                         Grid.Column="1"
-                         Grid.Row="1"
-                         DateSelected="DateSelected"/>
-
-            <Label  Text="Profit"
-                    VerticalOptions="Center"
+        <!--DateSelected="DateSelected"-->
+        <DatePicker x:Name="dtBegin"
+                    Date="{Binding DtBeg}"
+                    Grid.ColumnSpan="2"   
                     Grid.Column="0"
-                    Grid.Row="2"/>
+                    Grid.Row="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"/>
 
-            <Label  Text="{Binding Salary}"
+        <DatePicker  x:Name="dtEnd"
+                     Date="{Binding DtEnd}"
+                     Grid.Column="2"
+                     Grid.ColumnSpan="2"
+                     Grid.Row="0"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"/>
+
+        <Label  Text="Profit"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    Grid.Column="1"
+                    Grid.Row="1"/>
+
+        <Label  Text="{Binding Salary}"
+                    HorizontalOptions="Start"
                     VerticalOptions="Center"
                     x:Name="SalaryLabel"
+                    Grid.Column="2"
+                    Grid.Row="1"/>
+
+        <Label  Text="Expense"                   
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
                     Grid.Column="1"
                     Grid.Row="2"/>
 
-            <Label  Text="Expense"
-                    VerticalOptions="Center"
-                    Grid.Column="0"
-                    Grid.Row="3"/>
-
-            <Label  Text="{Binding Expense}"
+        <Label  Text="{Binding Expense}"
+                    HorizontalOptions="Start"
                     VerticalOptions="Center"
                     x:Name="SpendLabel"                
-                    Grid.Column="1"
-                    Grid.Row="3" />
-
-            <Button Text="Synchronize"
-                    x:Name="btnSynchronize"
-                    IsEnabled="False"
-                    Grid.Row="4"
+                    Grid.Column="2"
+                    Grid.Row="2" />
+               
+        <Button Text="{Binding BtnSynchtnizeText}"
+                    x:Name="btnSynchronize"                
+                    Grid.Row="3"
                     Grid.Column="0"
-                    Grid.ColumnSpan="2"
+                    Grid.ColumnSpan="4"
                     HorizontalOptions="Center"
-                    Clicked="SynchClick"/>
+                    VerticalOptions="Center"
+                    Command="{Binding BtnClick}"
+                    />
 
-            <syncfusion:SfDataGrid x:Name="dataGrid"
-                                   Grid.Row="5"
+        <syncfusion:SfDataGrid x:Name="dataGrid"
+                                   Grid.Row="4"
                                    Grid.Column="0"
-                                   Grid.ColumnSpan="2"
+                                   Grid.ColumnSpan="4"
                                    AutoGenerateColumns="False"                               
                                    ColumnSizer="Star"
                                    AllowSorting="True"
                                    AllowGroupExpandCollapse="True"
                                    VerticalOptions="Fill"
+                                   HorizontalOptions="FillAndExpand"
+                               ValueChanged="DataGrid_ValueChanged"
+                               GridLongPressed="DataGrid_GridLongPressed"                              
                                    ItemsSource="{Binding SMSs}">
 
-                <syncfusion:SfDataGrid.Columns x:TypeArguments="syncfusion:Columns">
+            <syncfusion:SfDataGrid.Columns x:TypeArguments="syncfusion:Columns">
 
-                    <syncfusion:GridTemplateColumn MappingName="Checked" HeaderText="" >
-                        <syncfusion:GridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <ia:Checkbox IsChecked="{Binding Checked}"  IsCheckedChanged="IsCheckedChanged" />
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </syncfusion:GridTemplateColumn.CellTemplate>
-                    </syncfusion:GridTemplateColumn>
+                <syncfusion:GridSwitchColumn HeaderText="" 
+                                                 MappingName="Checked" ColumnSizer="Auto" />
 
-                    <syncfusion:GridTextColumn HeaderText="SMSId"
-                                   MappingName="SMSId" />
+                <syncfusion:GridTextColumn HeaderText="Address"
+                                               MappingName="Address" />
 
-                    <syncfusion:GridTextColumn HeaderText="Amount"
-                                   MappingName="Amount" />
-                    <syncfusion:GridTextColumn HeaderText="Date"
-                                   MappingName="Date" Format="dd-MM-yyyy" />
-                </syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn HeaderText="Amount"
+                                               MappingName="Amount" />
 
-                <syncfusion:SfDataGrid.GroupColumnDescriptions>
-                    <syncfusion:GroupColumnDescription ColumnName="Target" />
-                </syncfusion:SfDataGrid.GroupColumnDescriptions>
+                <syncfusion:GridTextColumn HeaderText="Date"
+                                               MappingName="Date" 
+                                               Format="dd-MM-yyyy" />
 
-            </syncfusion:SfDataGrid>
-        </Grid>
+            </syncfusion:SfDataGrid.Columns>
 
-    </ScrollView>
+            <syncfusion:SfDataGrid.GroupColumnDescriptions>
+                <syncfusion:GroupColumnDescription ColumnName="Type" />
+            </syncfusion:SfDataGrid.GroupColumnDescriptions>
 
+        </syncfusion:SfDataGrid>
+    </Grid>
+    
 </ContentPage>

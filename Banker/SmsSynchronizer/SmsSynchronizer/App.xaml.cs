@@ -10,7 +10,6 @@ namespace SmsSynchronizer
     {
         public App()
         {
-            Xamarin.Forms.DataGrid.DataGridComponent.Init();
             InitializeComponent();
 
             //MainPage = new MainPage();

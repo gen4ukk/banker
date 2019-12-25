@@ -2,8 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmsSynchronizer.View.NavigationMaster"
+             xmlns:viewModels="clr-namespace:SmsSynchronizer.ViewModel"
              Title="Master">
-  <StackLayout>
+
+    <ContentPage.BindingContext>
+        <viewModels:NavigationMasterViewModel/>
+    </ContentPage.BindingContext>
+    
+    <StackLayout>
     <ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
               HasUnevenRows="true"
@@ -33,11 +39,11 @@
           <ViewCell>
                         <Grid Padding="5,10" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition Width="0.8*" />
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding IconSource}" VerticalOptions="Center"  HorizontalOptions="Center"/>
-                            <Label Grid.Column="1" Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="18" />
+                            <Label Grid.Column="1" Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Default" />
                         </Grid>
                     </ViewCell>
         </DataTemplate>

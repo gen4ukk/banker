@@ -1,4 +1,5 @@
 ﻿using SmsSynchronizer.Model;
+using SmsSynchronizer.ViewModel;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ namespace SmsSynchronizer.Services
     {
         List<SMSModel> GetNotSynchSMS(SettingsSchemaModel model, int code);
 
-        MainPageModel CalculateSalary(DateTime dtBegin, DateTime dtEnd);
+        MainPageViewModel CalculateSalary(DateTime dtBegin, DateTime dtEnd);
+
+        List<AddressesModel> GetAllSMSAddresses();
     }
 
     public interface ISQLite

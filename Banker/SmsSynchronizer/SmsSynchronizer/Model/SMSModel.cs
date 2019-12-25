@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +13,6 @@ namespace SmsSynchronizer.Model
 
         public int SMSId { get; set; }
 
-        [Ignore]
         public string Address { get; set; }
 
         public string Body { get; set; }
@@ -24,16 +24,20 @@ namespace SmsSynchronizer.Model
 
         public DateTime Date { get; set; }
 
-        public bool Profit { get; set; }
+        public SmsType Type { get; set; }
 
         [Ignore]
         public bool Checked { get; set; }
 
-        [Ignore]
-        public string Target
-        {
-            get { return Profit ? "Profit" : "Expense"; }
-            set { }
-        }
+        [ForeignKey(typeof(SettingsSchemaModel))]
+        public int SettingsSchemaId { get; set; }
+
+    }
+
+    public enum SmsType
+    {
+        Profit = 0,
+        Expense = 1,
+        Another = 2
     }
 }

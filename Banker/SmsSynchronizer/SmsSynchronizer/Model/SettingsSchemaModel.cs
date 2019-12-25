@@ -1,6 +1,7 @@
 ﻿using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace SmsSynchronizer.Model
@@ -19,8 +20,13 @@ namespace SmsSynchronizer.Model
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<KeyProfitWordModel> KeyProfitWords { get; set; }
 
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<SMSModel> SMSs { get; set; }
+
         public string PatternForAmount { get; set; }
 
         public bool UserSchema { get; set; }
+
+        public bool Use { get; set; }
     }
 }

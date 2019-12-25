@@ -9,35 +9,18 @@
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             Margin="0,20,0,20"
-            Clicked="Button_Clicked"
+            Command="{Binding BtnAddClick}"
             x:Name="BtnAddWord"/>
 
         <ListView x:Name="MyListView"
+                  ItemsSource="{Binding Items}"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement">
-
-            <!--Built in Cells-->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Name}" Height="40" TextColor="Black" />
                 </DataTemplate>
             </ListView.ItemTemplate>
-
-            <!--Custom View Cells-->
-            <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
         </ListView>
     </StackLayout>
 </ContentPage>

@@ -34,6 +34,39 @@ namespace SmsSynchronizer.Droid
             return GetSMS(selection, selectionArgs); ;
         }
 
+        public static List<AddressesModel> GetAllAddresses()
+        {
+            var res = new List<AddressesModel>();
+            try
+            {
+                var context = Application.Context.ApplicationContext;
+                var projection = new string[] { "address" };
+                var sortOrder = "address ASC";
+                var cursor = context.ContentResolver.Query(Telephony.Sms.Inbox.ContentUri, projection, null, null, sortOrder);
+
+                if (cursor.MoveToFirst())
+                {
+                    do
+                    {
+                        res.Add(new AddressesModel() { Name = cursor.GetString(cursor.GetColumnIndex("address")) });
+                    }
+                    while (cursor.MoveToNext());
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            var filteredList = res
+            .GroupBy(item => item.Name)
+            .Select(group => group.First())
+            .ToList();
+
+
+            return filteredList;
+        }
+
         public static List<SMSModel> GetSMSbyAddress(string address, DateTime dateBegin, DateTime dateEnd)
         {
             var selection = "address = ? and date > ? and date < ? ";
@@ -110,13 +143,19 @@ namespace SmsSynchronizer.Droid
 
                     if (match.Success)
                     {
-                        item.Profit = financeSMS;
-                        item.Amount = Convert.ToDouble(match.Groups[1].Value, CultureInfo.InvariantCulture.NumberFormat);
-                        item.Date = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddMilliseconds(Convert.ToInt64(item.UnixDate));
-                        item.Checked = true;
-
-                        parsedList.Add(item);
+                        item.Type = financeSMS ? SmsType.Profit : SmsType.Expense;
+                        double res;
+                        double.TryParse(match.Groups[1].Value, NumberStyles.Currency, CultureInfo.InvariantCulture.NumberFormat, out res);
+                        item.Amount = res;
                     }
+                    else
+                    {
+                        item.Type = SmsType.Another;
+                    }
+
+                    item.Date = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddMilliseconds(Convert.ToInt64(item.UnixDate));
+                    item.Checked = true;
+                    parsedList.Add(item);
                 }
             }
             catch (Exception ex)

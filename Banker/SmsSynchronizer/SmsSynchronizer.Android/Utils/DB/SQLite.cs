@@ -14,8 +14,7 @@ namespace SmsSynchronizer.Droid.Utils.DB
             var filename = "Synchronizer.db3";
             var documentspath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var path = Path.Combine(documentspath, filename);
-
-            var connection = new SQLiteConnection(path);
+            var connection = new SQLiteConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.FullMutex);
             return connection;
         }
     }

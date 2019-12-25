@@ -12,10 +12,10 @@ namespace SmsSynchronizer.Utils.DB
     {
         private SQLiteConnection sqlconnection;
 
-        public SMSDB()
+        public SMSDB(SQLiteConnection connection)
         {
             //Getting conection and Creating table  
-            sqlconnection = DependencyService.Get<ISQLite>().GetConnection();
+            sqlconnection = connection;
             sqlconnection.CreateTable<SMSModel>();
         }
 
@@ -41,9 +41,10 @@ namespace SmsSynchronizer.Utils.DB
         }
 
         //Get max sms code  
-        public SMSModel GetMaxSMS()
+        public SMSModel GetMaxSMS(int schemaId)
         {
             return (from t in sqlconnection.Table<SMSModel>()
+                    where t.SettingsSchemaId == schemaId
                     orderby t.SMSId descending
                     select t
                     ).FirstOrDefault();

@@ -13,9 +13,9 @@ namespace SmsSynchronizer.Utils.DB
     {
         private SQLiteConnection sqlconnection;
 
-        public KeyProfitWordDB()
+        public KeyProfitWordDB(SQLiteConnection connection)
         {
-            sqlconnection = DependencyService.Get<ISQLite>().GetConnection();
+            sqlconnection = connection;
             sqlconnection.CreateTable<KeyProfitWordModel>();
         }
 

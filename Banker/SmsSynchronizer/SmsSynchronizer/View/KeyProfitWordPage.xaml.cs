@@ -1,4 +1,5 @@
 ﻿using SmsSynchronizer.Model;
+using SmsSynchronizer.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,18 +15,9 @@ namespace SmsSynchronizer.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class KeyProfitWordPage : ContentPage
     {
-        public ObservableCollection<KeyProfitWordModel> Items { get; set; }
-        private bool isUserSchema;
-
-        private SettingsSchemaModel Schema;
-
         public KeyProfitWordPage(SettingsSchemaModel schema) : this()
         {
-            Schema = schema;
-            isUserSchema = Schema.UserSchema;
-            Items = new ObservableCollection<KeyProfitWordModel>(Schema.KeyProfitWords);
-            MyListView.ItemsSource = Items;
-            BtnAddWord.IsEnabled = isUserSchema;
+            BindingContext = new KeyProfitWordViewModel(schema, this);
         }
 
         public KeyProfitWordPage()
@@ -35,28 +27,11 @@ namespace SmsSynchronizer.View
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            if (e.Item == null || !isUserSchema)
+            if (e.Item == null)
                 return;
+            await ((KeyProfitWordViewModel)BindingContext).DeleteWord((KeyProfitWordModel)e.Item);
 
-            var action = await DisplayAlert("Delete", "Do you want delete this item", "Yes", "No");
-
-            if (action)
-            {
-                Items.Remove((KeyProfitWordModel)e.Item);
-            }
-
-            //Deselect Item
             ((ListView)sender).SelectedItem = null;
-        }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            string result = await DisplayPromptAsync("Profit word", null);
-
-            if (!string.IsNullOrEmpty(result))
-            {
-                Items.Add(new KeyProfitWordModel() { Name = result, SettingsSchemaId = Schema .Id});
-            }
         }
     }
 }

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmsSynchronizer.View.SettingsListViewPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms">
+
+    <syncfusion:SfListView 
+        ItemsSource="{Binding Items}"
+        SelectionChanged ="ListView_SelectionChanged"
+        x:Name="listView" 
+        AutoFitMode="Height" 
+        SwipeOffset="301"
+        SwipeThreshold="180"
+        SwipeEnded="ListView_SwipeEnded"
+        AllowSwiping="True"
+        SelectionBackgroundColor="Transparent"
+        IsStickyHeader="True">
+
+        <syncfusion:SfListView.RightSwipeTemplate>
+            <DataTemplate x:Name="RightSwipeTemplate">
+                <Grid BackgroundColor="#DC595F" HorizontalOptions="Fill" VerticalOptions="Fill">
+                    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Grid.Column="0"
+                 Grid.Row="0"
+                 HeightRequest="35"
+                 WidthRequest="35"                 
+                 BackgroundColor="Transparent"
+                 Source="delete.png" />
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </syncfusion:SfListView.RightSwipeTemplate>
+
+        <syncfusion:SfListView.ItemTemplate>
+            <DataTemplate>
+                <Frame CornerRadius="10" HasShadow="True" Padding="2" Margin="2">
+                    <Grid x:Name="gridItem">
+                        <Label Padding="5" 
+                           Grid.Row="0" 
+                           Text="{Binding SchemaName}"
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           VerticalOptions="Center"/>
+                        <Label Padding="5"
+                           Grid.Row="1" 
+                           Text="{Binding BankName}"
+                           VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </syncfusion:SfListView.ItemTemplate>
+
+        <syncfusion:SfListView.HeaderTemplate>
+            <DataTemplate>
+                <Button 
+                    Text="Add new schema" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Margin="0,5,0,0"
+                    Command="{Binding BtnAddClick}"/>
+            </DataTemplate>
+        </syncfusion:SfListView.HeaderTemplate>
+
+    </syncfusion:SfListView>
+
+</ContentPage>

@@ -1,6 +1,9 @@
-﻿using SmsSynchronizer.Model;
+﻿using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using SmsSynchronizer.Model;
 using SmsSynchronizer.Services;
 using SmsSynchronizer.Utils.DB;
+using SmsSynchronizer.ViewModel;
 using Syncfusion.SfDataGrid.XForms;
 using System;
 using System.Collections.Generic;
@@ -10,120 +13,57 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SmsSynchronizer
+namespace SmsSynchronizer.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        private SMSDB smsDb = new SMSDB();
-        private SettingsSchemaDB schemaDB = new SettingsSchemaDB();
-        private MainPageModel model;
-
         public MainPage()
         {
             InitializeComponent();
-                     
-            //smsDb.DropTable();
-            //smsDb = new SMSDB();
-
-            model = new MainPageModel();
-
-            BindingContext = model;
-            dataGrid.GridLongPressed += DataGrid_GridLongPressed;
-
-            var today = DateTime.Today;
-            dtEnd.Date = today;
-            dtBegin.Date = new DateTime(today.Date.Year, today.Date.Month, 1);
+            CheckPermission();
         }
 
-        protected override void OnAppearing()
+        private void DataGrid_ValueChanged(object sender, Syncfusion.SfDataGrid.XForms.ValueChangedEventArgs e)
         {
-            base.OnAppearing();
-            RefreshPage();
-        }
+            if (e.RowColumnIndex.ColumnIndex != 0 || ((SMSModel)e.RowData).Type == SmsType.Another)
+                return;
 
-        private void SynchClick(object sender, EventArgs e)
-        {
-            var serv = DependencyService.Get<BtnClickService>();
-            SettingsSchemaModel schemaModel = schemaDB.GetUsersSchema();
-            var smss = GetNotSyhchSMS(schemaModel);
-
-            foreach (var item in smss)
+            if (BindingContext != null && BindingContext is MainPageViewModel bk)
             {
-                smsDb.AddSMS(item);
+                bk.CalculateSalaryAndExpense();
             }
-
-            RefreshPage();
         }
 
         private async void DataGrid_GridLongPressed(object sender, GridLongPressedEventArgs e)
         {
             if (e.RowColumnIndex.ColumnIndex > 0)
             {
-                if ((e.RowData is SMSModel sms))
+                if (e.RowData is SMSModel sms)
                 {
                     await DisplayAlert("SMS", sms.Body, "OK");                   
                 }
             }
         }      
 
-        private void DateSelected(object sender, DateChangedEventArgs e)
+        private async void CheckPermission()
         {
-            RefreshPage();
-        }
-
-        private void RefreshPage()
-        {
-            SettingsSchemaModel schemaModel = schemaDB.GetUsersSchema();
-
-            model.SMSs = smsDb.GetSMSs(dtBegin.Date, dtEnd.Date).Select(t => { t.Checked = true; return t; }).ToList();
-            IsCheckedChanged(null, null);
-            CheckNotSynchronizedSMS(schemaModel);
-        }
-
-        private void IsCheckedChanged(object sender, TappedEventArgs e)
-        {
-            if (BindingContext != null && BindingContext is MainPageModel bk)
+            try
             {
-                bk.Salary = 0;
-                bk.Expense = 0;
-
-                foreach (var item in bk.SMSs.Where(t => t.Checked))
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Sms);
+                if (status != PermissionStatus.Granted)
                 {
-                    if (item.Profit)
+                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Sms))
                     {
-                        bk.Salary += item.Amount;
+                        await DisplayAlert("Attention", "Application needs access to SMS", "OK");
                     }
-                    else
-                    {
-                        bk.Expense += item.Amount;
-                    }
-                }
+                    await CrossPermissions.Current.RequestPermissionsAsync(Permission.Sms);
+                };
             }
-        }
-
-        private void CheckNotSynchronizedSMS(SettingsSchemaModel schema)
-        {
-            var smss = GetNotSyhchSMS(schema);
-
-            if (smss.Count > 0)
+            catch (Exception ex)
             {
-                btnSynchronize.Text = $"Synchronize ({smss.Count})";
-                btnSynchronize.IsEnabled = true;
-            }
-            else
-            {
-                btnSynchronize.Text = $"Synchronize";
-                btnSynchronize.IsEnabled = false;
-            }
-        }
 
-        private List<SMSModel> GetNotSyhchSMS(SettingsSchemaModel schema)
-        {
-            var sms = smsDb.GetMaxSMS();
-            int code = sms == null ? 0 : sms.SMSId;
-            var serv = DependencyService.Get<BtnClickService>();
-            return serv.GetNotSynchSMS(schema, code);
+            }
         }
     }
 }

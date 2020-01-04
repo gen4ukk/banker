@@ -8,8 +8,8 @@
     <pages:NavigationMaster x:Name="MasterPage" />
   </MasterDetailPage.Master>
   <MasterDetailPage.Detail>
-    <NavigationPage>
-      <x:Arguments>
+        <NavigationPage>
+            <x:Arguments>
                 <page2:CurrencyExchange />
       </x:Arguments>
     </NavigationPage>

@@ -19,7 +19,6 @@ namespace SmsSynchronizer.View
         public static BtnClickService DependencyServices = DependencyService.Get<BtnClickService>();
         public Navigation()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Utils.license.Syncfusion.LICENSE);
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
         }

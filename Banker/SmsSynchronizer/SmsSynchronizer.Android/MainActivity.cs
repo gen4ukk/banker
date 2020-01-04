@@ -19,7 +19,7 @@ using SmsSynchronizer.ViewModel;
 [assembly: Xamarin.Forms.Dependency(typeof(SmsSynchronizer.Droid.MainActivity))]
 namespace SmsSynchronizer.Droid
 {
-    [Activity(Label = "SmsSynchronizer", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "SmsSynchronizer", Icon = "@drawable/logo", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity , BtnClickService
     {
         public MainPageViewModel CalculateSalary(DateTime dtBegin, DateTime dtEnd)

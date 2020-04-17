@@ -5,49 +5,60 @@
              xmlns:viewModels="clr-namespace:SmsSynchronizer.ViewModel"
              Title="Master">
 
-    <ContentPage.BindingContext>
-        <viewModels:NavigationMasterViewModel/>
-    </ContentPage.BindingContext>
-    
     <StackLayout>
-    <ListView x:Name="MenuItemsListView"
-              SeparatorVisibility="None"
-              HasUnevenRows="true"
-              ItemsSource="{Binding MenuItems}">
-      <ListView.Header>
-        <Grid BackgroundColor="#03A9F4">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10"/>
-          </Grid.ColumnDefinitions>
-          <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="10"/>
-          </Grid.RowDefinitions>
-          <Label
-              Grid.Column="1"
-              Grid.Row="2"
-              Text="{Binding User.Name}"
-              Style="{DynamicResource SubtitleStyle}"/>
-        </Grid>
-      </ListView.Header>
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-                        <Grid Padding="5,10" >
+        <ListView x:Name="MenuItemsListView"
+                  SeparatorVisibility="None"
+                  HasUnevenRows="true"
+                  ItemsSource="{Binding MenuItems}">
+            <ListView.Header>
+                <Grid BackgroundColor="#03A9F4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Column="3"
+                           Grid.Row="2"
+                           Source="{Binding Language}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label Grid.Column="1"
+                           Grid.Row="2"
+                           Text="{Binding User.Name}"
+                           Style="{DynamicResource SubtitleStyle}" />
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition Width="0.2*" />
                                 <ColumnDefinition Width="0.8*" />
                             </Grid.ColumnDefinitions>
-                            <Image Source="{Binding IconSource}" VerticalOptions="Center"  HorizontalOptions="Center"/>
-                            <Label Grid.Column="1" Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Default" />
+                            <Image Source="{Binding IconSource}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Title}"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="Default" />
                         </Grid>
                     </ViewCell>
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
-  </StackLayout>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

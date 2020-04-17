@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CurrencyExchangeTableColumn1" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="CurrencyExchangeTableColumn2" xml:space="preserve">
+    <value>Покупка</value>
+  </data>
+  <data name="CurrencyExchangeTableColumn3" xml:space="preserve">
+    <value>Продажа</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="DeleteQuestion" xml:space="preserve">
+    <value>Вы действительно хотите удалить?</value>
+  </data>
+  <data name="KeyProfitWordAddNew" xml:space="preserve">
+    <value>Добавить новое слово</value>
+  </data>
+  <data name="KeyProfitWordTitle" xml:space="preserve">
+    <value>Слова Дохода</value>
+  </data>
+  <data name="NavigationMasterPageNameCalculations" xml:space="preserve">
+    <value>Вычисления</value>
+  </data>
+  <data name="NavigationMasterPageNameSettings" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
+  <data name="MainPageGridColumnAddress" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="MainPageGridColumnAmount" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="MainPageGridColumnDate" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="MainPageLabelExpense" xml:space="preserve">
+    <value>Расход</value>
+  </data>
+  <data name="MainPageLabelProfit" xml:space="preserve">
+    <value>Приход</value>
+  </data>
+  <data name="MainPageTitle" xml:space="preserve">
+    <value>Вычисления</value>
+  </data>
+  <data name="NeedAccessToSms" xml:space="preserve">
+    <value>Приложению нужен доступ к СМС</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="MainPageViewModelSynchronizeBtnName" xml:space="preserve">
+    <value>Cинхронизировать</value>
+  </data>
+  <data name="NavigationMasterViewModelSelectLanguage" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
+  <data name="NoItemsFound" xml:space="preserve">
+    <value>Ничего не найдено</value>
+  </data>
+  <data name="SettingsListViewPageAddNew" xml:space="preserve">
+    <value>Добавить новую схему</value>
+  </data>
+  <data name="SettingsPageBanksName" xml:space="preserve">
+    <value>Название банка</value>
+  </data>
+  <data name="SettingsPagePattern" xml:space="preserve">
+    <value>Шаблон для Суммы</value>
+  </data>
+  <data name="SettingsPageProfitWords" xml:space="preserve">
+    <value>Ключевые слова Дохода</value>
+  </data>
+  <data name="SettingsPageSave" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SettingsPageSchemaName" xml:space="preserve">
+    <value>Название схемы</value>
+  </data>
+  <data name="SettingsPageShowAllMessages" xml:space="preserve">
+    <value>Показать все сообщения</value>
+  </data>
+  <data name="SettingsPageTitle" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="SettingsPageUse" xml:space="preserve">
+    <value>Использовать</value>
+  </data>
+  <data name="NavigationMasterPageNameCurrencyExchange" xml:space="preserve">
+    <value>Курс валют</value>
+  </data>
+</root>

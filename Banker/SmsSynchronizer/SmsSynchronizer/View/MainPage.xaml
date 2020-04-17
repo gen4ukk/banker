@@ -4,7 +4,8 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
              xmlns:viewModels="clr-namespace:SmsSynchronizer.ViewModel"
              x:Class="SmsSynchronizer.View.MainPage"
-             Title="Calculations">
+             xmlns:properties="clr-namespace:SmsSynchronizer.Utils.Localization"
+             Title="{x:Static properties:AppResources.MainPageTitle}">
 
     <ContentPage.BindingContext>
         <viewModels:MainPageViewModel/>
@@ -25,7 +26,6 @@
             <RowDefinition Height="0.7*" />
         </Grid.RowDefinitions>
 
-        <!--DateSelected="DateSelected"-->
         <DatePicker x:Name="dtBegin"
                     Date="{Binding DtBeg}"
                     Grid.ColumnSpan="2"   
@@ -42,7 +42,7 @@
                      VerticalOptions="Center"
                      HorizontalOptions="Center"/>
 
-        <Label  Text="Profit"
+        <Label  Text="{x:Static properties:AppResources.MainPageLabelProfit}"
                     HorizontalOptions="Start"
                     VerticalOptions="Center"
                     Grid.Column="1"
@@ -55,7 +55,7 @@
                     Grid.Column="2"
                     Grid.Row="1"/>
 
-        <Label  Text="Expense"                   
+        <Label  Text="{x:Static properties:AppResources.MainPageLabelExpense}"                   
                     HorizontalOptions="Start"
                     VerticalOptions="Center"
                     Grid.Column="1"
@@ -97,13 +97,13 @@
                 <syncfusion:GridSwitchColumn HeaderText="" 
                                                  MappingName="Checked" ColumnSizer="Auto" />
 
-                <syncfusion:GridTextColumn HeaderText="Address"
+                <syncfusion:GridTextColumn HeaderText="{x:Static properties:AppResources.MainPageGridColumnAddress}"
                                                MappingName="Address" />
 
-                <syncfusion:GridTextColumn HeaderText="Amount"
+                <syncfusion:GridTextColumn HeaderText="{x:Static properties:AppResources.MainPageGridColumnAmount}"
                                                MappingName="Amount" />
 
-                <syncfusion:GridTextColumn HeaderText="Date"
+                <syncfusion:GridTextColumn HeaderText="{x:Static properties:AppResources.MainPageGridColumnDate}"
                                                MappingName="Date" 
                                                Format="dd-MM-yyyy" />
 

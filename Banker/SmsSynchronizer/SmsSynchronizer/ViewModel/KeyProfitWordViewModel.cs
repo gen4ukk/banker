@@ -1,5 +1,6 @@
 ﻿using SmsSynchronizer.Model;
 using SmsSynchronizer.Utils.DB;
+using SmsSynchronizer.Utils.Localization;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,7 +42,7 @@ namespace SmsSynchronizer.ViewModel
 
         private async void AddClick(object parametr)
         {
-            string result = await page.DisplayPromptAsync("Profit word", null);
+            string result = await page.DisplayPromptAsync(null, null);
 
             if (!string.IsNullOrEmpty(result))
             {
@@ -61,7 +62,7 @@ namespace SmsSynchronizer.ViewModel
             if (!CanAddClick(null))
                 return;
 
-            var action = await page.DisplayAlert("Delete", "Are you sure you want to delete?", "Yes", "No");
+            var action = await page.DisplayAlert(AppResources.Delete, AppResources.DeleteQuestion, AppResources.Yes, AppResources.No);
 
             if (action)
             {

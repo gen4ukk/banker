@@ -1,6 +1,7 @@
 ﻿using SmsSynchronizer.Model;
 using SmsSynchronizer.Services;
 using SmsSynchronizer.Utils.DB;
+using SmsSynchronizer.Utils.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,19 +60,19 @@ namespace SmsSynchronizer.ViewModel
         public double Salary
         {
             get { return salary; }
-            set { salary = value; OnPropertyChanged("Salary"); }
+            set { salary = value; OnPropertyChanged(nameof(Salary)); }
         }
 
         public double Expense
         {
             get { return expense; }
-            set { expense = value; OnPropertyChanged("Expense"); }
+            set { expense = value; OnPropertyChanged(nameof(Expense)); }
         }
 
         public List<SMSModel> SMSs
         {
             get { return smss; }
-            set { smss = value; OnPropertyChanged("SMSs"); }
+            set { smss = value; OnPropertyChanged(nameof(SMSs)); }
         }
 
         public List<SMSModel> SmssForSynch
@@ -160,7 +161,7 @@ namespace SmsSynchronizer.ViewModel
             }
 
             SmssForSynch = temp;
-            BtnSynchtnizeText = $"Synchronize({SmssForSynch.Count})";
+            BtnSynchtnizeText = $"{AppResources.MainPageViewModelSynchronizeBtnName}({SmssForSynch.Count})";
         }
 
         public bool CanExecute(object parameter)

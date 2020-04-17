@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmsSynchronizer.View.KeyProfitWordPage"
-             Title="Profit words">
+             xmlns:properties="clr-namespace:SmsSynchronizer.Utils.Localization"
+             Title="{x:Static properties:AppResources.KeyProfitWordTitle}">
     <StackLayout>
-        <Button 
-            Text="Add new word"
+        <Button Text="{x:Static properties:AppResources.KeyProfitWordAddNew}"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             Margin="0,20,0,20"

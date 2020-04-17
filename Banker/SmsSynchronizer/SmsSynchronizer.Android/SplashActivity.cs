@@ -30,18 +30,12 @@ namespace SmsSynchronizer.Droid
             base.OnResume();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SmsSynchronizer.Utils.license.Syncfusion.LICENSE);
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
-            //Task startupWork = new Task(() => { SimulateStartup(); });
-            //startupWork.Start();
-
-            //Task.Run(() => { StartActivity(new Intent(Application.Context, typeof(MainActivity))); });
         }
 
         async void SimulateStartup()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SmsSynchronizer.Utils.license.Syncfusion.LICENSE);
             await Task.Run(() => { StartActivity(new Intent(Application.Context, typeof(MainActivity))); });
-            //await Task.Delay(8000); // Simulate a bit of startup work.
-            //StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }
 }

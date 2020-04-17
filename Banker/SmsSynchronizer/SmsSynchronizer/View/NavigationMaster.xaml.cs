@@ -23,6 +23,8 @@ namespace SmsSynchronizer.View
         public NavigationMaster()
         {
             InitializeComponent();
+            BindingContext = new NavigationMasterViewModel() { Page = this };
+
             ListView = MenuItemsListView;
         }
     }

@@ -38,10 +38,5 @@ namespace SmsSynchronizer.View
             base.OnAppearing();
             BindPage();
         }
-
-        private void ComboBox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

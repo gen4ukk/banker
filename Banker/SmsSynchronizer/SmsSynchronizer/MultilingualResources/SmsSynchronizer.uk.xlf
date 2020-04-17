@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="uk" original="SMSSYNCHRONIZER/UTILS/LOCALIZATION/APPRESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6915.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="SMSSYNCHRONIZER/UTILS/LOCALIZATION/APPRESOURCES.RESX" datatype="resx">
+        <trans-unit id="CurrencyExchangeTableColumn1" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <target state="translated">Ім'я</target>
+        </trans-unit>
+        <trans-unit id="CurrencyExchangeTableColumn2" translate="yes" xml:space="preserve">
+          <source>Buy</source>
+          <target state="translated">Придбати</target>
+        </trans-unit>
+        <trans-unit id="CurrencyExchangeTableColumn3" translate="yes" xml:space="preserve">
+          <source>Sale</source>
+          <target state="translated">Продати</target>
+        </trans-unit>
+        <trans-unit id="Delete" translate="yes" xml:space="preserve">
+          <source>Delete</source>
+          <target state="translated">Видалити</target>
+        </trans-unit>
+        <trans-unit id="DeleteQuestion" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete?</source>
+          <target state="translated">Дійсно видалити?</target>
+        </trans-unit>
+        <trans-unit id="KeyProfitWordAddNew" translate="yes" xml:space="preserve">
+          <source>Add new word</source>
+          <target state="translated">Додати нове слово</target>
+        </trans-unit>
+        <trans-unit id="KeyProfitWordTitle" translate="yes" xml:space="preserve">
+          <source>Profit words</source>
+          <target state="translated">Слова Прибутку</target>
+        </trans-unit>
+        <trans-unit id="NavigationMasterPageNameCalculations" translate="yes" xml:space="preserve">
+          <source>Calculations</source>
+          <target state="translated">Розрахунки</target>
+        </trans-unit>
+        <trans-unit id="NavigationMasterPageNameSettings" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target state="translated">Налаштування</target>
+        </trans-unit>
+        <trans-unit id="No" translate="yes" xml:space="preserve">
+          <source>No</source>
+          <target state="translated">Ні</target>
+        </trans-unit>
+        <trans-unit id="Yes" translate="yes" xml:space="preserve">
+          <source>Yes</source>
+          <target state="translated">Так</target>
+        </trans-unit>
+        <trans-unit id="Attention" translate="yes" xml:space="preserve">
+          <source>Attention</source>
+          <target state="translated">Увага</target>
+        </trans-unit>
+        <trans-unit id="MainPageGridColumnAddress" translate="yes" xml:space="preserve">
+          <source>Address</source>
+          <target state="translated">Адреса</target>
+        </trans-unit>
+        <trans-unit id="MainPageGridColumnAmount" translate="yes" xml:space="preserve">
+          <source>Amount</source>
+          <target state="translated">Сума</target>
+        </trans-unit>
+        <trans-unit id="MainPageGridColumnDate" translate="yes" xml:space="preserve">
+          <source>Date</source>
+          <target state="translated">Дата</target>
+        </trans-unit>
+        <trans-unit id="MainPageLabelExpense" translate="yes" xml:space="preserve">
+          <source>Expense</source>
+          <target state="translated">Витрати</target>
+        </trans-unit>
+        <trans-unit id="MainPageLabelProfit" translate="yes" xml:space="preserve">
+          <source>Profit</source>
+          <target state="translated">Прибуток</target>
+        </trans-unit>
+        <trans-unit id="MainPageTitle" translate="yes" xml:space="preserve">
+          <source>Calculations</source>
+          <target state="translated">Розрахунки</target>
+        </trans-unit>
+        <trans-unit id="NeedAccessToSms" translate="yes" xml:space="preserve">
+          <source>Application needs access to SMS</source>
+          <target state="translated">Додаток потребує доступу до SMS</target>
+        </trans-unit>
+        <trans-unit id="OK" translate="yes" xml:space="preserve">
+          <source>OK</source>
+          <target state="translated">OK</target>
+        </trans-unit>
+        <trans-unit id="Cancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="translated">Скасувати</target>
+        </trans-unit>
+        <trans-unit id="MainPageViewModelSynchronizeBtnName" translate="yes" xml:space="preserve">
+          <source>Synchronize</source>
+          <target state="translated">Синхронізувати</target>
+        </trans-unit>
+        <trans-unit id="NavigationMasterViewModelSelectLanguage" translate="yes" xml:space="preserve">
+          <source>Select language</source>
+          <target state="translated">Оберіть мову</target>
+        </trans-unit>
+        <trans-unit id="NoItemsFound" translate="yes" xml:space="preserve">
+          <source>No items found</source>
+          <target state="translated">Елементів не знайдено</target>
+        </trans-unit>
+        <trans-unit id="SettingsListViewPageAddNew" translate="yes" xml:space="preserve">
+          <source>Add new schema</source>
+          <target state="translated">Додати нову схему</target>
+        </trans-unit>
+        <trans-unit id="SettingsPageBanksName" translate="yes" xml:space="preserve">
+          <source>Banks Name</source>
+          <target state="translated">Назва банка</target>
+        </trans-unit>
+        <trans-unit id="SettingsPagePattern" translate="yes" xml:space="preserve">
+          <source>Pattern for amount</source>
+          <target state="translated">Шаблон для сум</target>
+        </trans-unit>
+        <trans-unit id="SettingsPageProfitWords" translate="yes" xml:space="preserve">
+          <source>Key profit words</source>
+          <target state="translated">Ключові слова для Прибутку</target>
+        </trans-unit>
+        <trans-unit id="SettingsPageSave" translate="yes" xml:space="preserve">
+          <source>Save</source>
+          <target state="translated">Зберегти</target>
+        </trans-unit>
+        <trans-unit id="SettingsPageSchemaName" translate="yes" xml:space="preserve">
+          <source>Schemas name</source>
+          <target state="translated">Назва схеми</target>
+        </trans-unit>
+        <trans-unit id="SettingsPageShowAllMessages" translate="yes" xml:space="preserve">
+          <source>Show all messages</source>
+          <target state="translated">Показати всі повідомлення</target>
+        </trans-unit>
+        <trans-unit id="SettingsPageTitle" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target state="translated">Налаштування</target>
+        </trans-unit>
+        <trans-unit id="SettingsPageUse" translate="yes" xml:space="preserve">
+          <source>Use</source>
+          <target state="translated">Використовувати</target>
+        </trans-unit>
+        <trans-unit id="NavigationMasterPageNameCurrencyExchange" translate="yes" xml:space="preserve">
+          <source>Exchange Rates</source>
+          <target state="translated">Курс валют</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

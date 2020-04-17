@@ -29,7 +29,7 @@ namespace SmsSynchronizer.Utils.DB
 
             if (res == null)
             {
-                res = new UserModel() { Name = "Evgen" };
+                res = new UserModel() { Name = "Evgen", Language = "en-US" };
             }
 
             var schema = new SettingsSchemaDB(sqlconnection).GetDefaultScheme();
@@ -52,6 +52,11 @@ namespace SmsSynchronizer.Utils.DB
         public int DropTable()
         {
             return sqlconnection.DropTable<UserModel>();
+        }
+
+        public void UpdateUser(UserModel user)
+        {
+            sqlconnection.Update(user);
         }
     }
 }

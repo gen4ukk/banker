@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
              xmlns:viewModels="clr-namespace:SmsSynchronizer.ViewModel"
+             xmlns:properties="clr-namespace:SmsSynchronizer.Utils.Localization"
              x:Class="SmsSynchronizer.View.CurrencyExchange">
 
     <ContentPage.BindingContext>
@@ -25,13 +26,13 @@
 
                 <syncfusion:SfDataGrid.Columns x:TypeArguments="syncfusion:Columns">
 
-                    <syncfusion:GridTextColumn HeaderText="Name"
+                    <syncfusion:GridTextColumn HeaderText="{x:Static properties:AppResources.CurrencyExchangeTableColumn1}"
                                                MappingName="Name" />
 
-                    <syncfusion:GridTextColumn HeaderText="Buy"
+                    <syncfusion:GridTextColumn HeaderText="{x:Static properties:AppResources.CurrencyExchangeTableColumn2}"
                                                MappingName="Buy" />
 
-                    <syncfusion:GridTextColumn HeaderText="Sale"
+                    <syncfusion:GridTextColumn HeaderText="{x:Static properties:AppResources.CurrencyExchangeTableColumn3}"
                                                MappingName="Sale" />
 
                 </syncfusion:SfDataGrid.Columns>

@@ -1,4 +1,5 @@
 ﻿using SmsSynchronizer.Model;
+using SmsSynchronizer.Utils.Localization;
 using SmsSynchronizer.ViewModel;
 using Syncfusion.ListView.XForms;
 using System;
@@ -43,7 +44,7 @@ namespace SmsSynchronizer.View
         {
             if (e.SwipeOffset > 300)
             {
-                var action = await DisplayAlert("Delete", "Are you sure you want to delete?", "Yes", "No");
+                var action = await DisplayAlert(AppResources.Delete, AppResources.DeleteQuestion, AppResources.Yes, AppResources.No);
 
                 if (action)
                 {

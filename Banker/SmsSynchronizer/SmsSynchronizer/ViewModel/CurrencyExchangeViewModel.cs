@@ -15,8 +15,16 @@ namespace SmsSynchronizer.ViewModel
         public CurrencyExchangeViewModel()
         {
             WebClient client = new WebClient();
+            byte[] data = null;
 
-            var data = client.DownloadData(financeuaUrl);
+            try
+            {
+                data = client.DownloadData(financeuaUrl);
+            }
+            catch (Exception ex)
+            {
+
+            }          
 
             CurrencyExchangeModel model;
             if (data != null)

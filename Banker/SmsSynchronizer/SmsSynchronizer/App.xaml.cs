@@ -1,5 +1,7 @@
-﻿using SmsSynchronizer.View;
+﻿using SmsSynchronizer.Utils.DB;
+using SmsSynchronizer.View;
 using System;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,6 +15,9 @@ namespace SmsSynchronizer
             InitializeComponent();
 
             //MainPage = new MainPage();
+            
+            var culture = new CultureInfo(DBHelper.Instance().UserDB.GetDefaultUser().Language);
+            Utils.Localization.AppResources.Culture = culture;
             MainPage = new Navigation();
         }
 

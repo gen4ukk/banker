@@ -3,10 +3,12 @@ using Plugin.Permissions.Abstractions;
 using SmsSynchronizer.Model;
 using SmsSynchronizer.Services;
 using SmsSynchronizer.Utils.DB;
+using SmsSynchronizer.Utils.Localization;
 using SmsSynchronizer.ViewModel;
 using Syncfusion.SfDataGrid.XForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +57,7 @@ namespace SmsSynchronizer.View
                 {
                     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Sms))
                     {
-                        await DisplayAlert("Attention", "Application needs access to SMS", "OK");
+                        await DisplayAlert(AppResources.Attention, AppResources.NeedAccessToSms, AppResources.OK);
                     }
                     await CrossPermissions.Current.RequestPermissionsAsync(Permission.Sms);
                 };

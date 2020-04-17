@@ -10,7 +10,7 @@
   <MasterDetailPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <page2:CurrencyExchange />
+                <page2:MainPage />
       </x:Arguments>
     </NavigationPage>
   </MasterDetailPage.Detail>
